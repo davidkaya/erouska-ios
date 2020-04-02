@@ -17,7 +17,7 @@ final class DataHeaderCell: UITableViewCell {
     @IBOutlet private weak var segmentedControl: UISegmentedControl!
 
     func configure(with numberOfScans: Int) {
-        titleLabel.text = "Za poslednich 14 dní jste potkali \(numberOfScans) uživatelů aplikace eRouška"
+        titleLabel.text = "Za poslednich 14 dní jste potkali \(numberOfScans) \(formatUserString(with: numberOfScans)) aplikace eRouška"
         segmentedControl.setTitle("Blízka setkaní", forSegmentAt: 0)
         segmentedControl.setTitle("Všechna data", forSegmentAt: 1)
 
@@ -29,6 +29,15 @@ final class DataHeaderCell: UITableViewCell {
                 .resize(toWidth: 19)?
                 .withRenderingMode(.alwaysTemplate)
             infoButton.setImage(image, for: .normal)
+        }
+    }
+    
+    private func formatUserString(with numberOfUsers: Int) -> String {
+        switch (numberOfUsers) {
+        case 1..<5:
+            return "uživatele"
+        default:
+            return "uživatelů"
         }
     }
 }
